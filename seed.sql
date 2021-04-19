@@ -26,3 +26,9 @@ manager_id INT,
 PRIMARY KEY (id),
 FOREIGN KEY (manager_id) REFERENCES employee(id)
 );
+
+
+-- TODO
+-- Add in data to all 3 tables
+-- 5 entries per table
+-- 5 departments, employees, roles
