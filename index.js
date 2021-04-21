@@ -37,15 +37,31 @@ const starterUp = () => {
             ],
         }
     ]).then((answers) => {
-        if (answers.addChoice === "Add a Department") {
-            addDepartment();
-        } else if(answers.addChoice === "Add an Employee"){
-            addEmployee();
-        }else if(answers.addChoice === "Add a Role"){
-            addRole()
-        }else if(answers.addChoice === "Nevermind, Exit Application!"){
-            quit();
+        switch (answers.addChoice) {
+            case "Add a Department":
+                addDepartment();
+                break;
+            case "Add an Employee":
+                addEmployee();
+                break;
+            case "Add a Role":
+                addRole();
+                break;
+            case "Nevermind, Exit Application!":
+                quit();    
+            default:
+                break;
         }
+        
+        // if (answers.addChoice === "Add a Department") {
+        //     addDepartment();
+        // } else if(answers.addChoice === "Add an Employee"){
+        //     addEmployee();
+        // }else if(answers.addChoice === "Add a Role"){
+        //     addRole()
+        // }else if(answers.addChoice === "Nevermind, Exit Application!"){
+        //     quit();
+        // }
     })
 };
 
