@@ -30,6 +30,9 @@ const starterUp = () => {
                 name: "addChoice",
                 message: "Please choose what you would like to do:",
                 choices: [
+                    "View a Department",
+                    "View an Employee",
+                    "View a Role",
                     "Add a Department",
                     "Add an Employee",
                     "Add a Role",
@@ -38,15 +41,18 @@ const starterUp = () => {
             }
         ]).then((answers) => {
             switch (answers.addChoice) {
-                case "Add a Department":
-                    addDepartment();
+                // need to add switch cases for Add Department, Employee, and a Role
+
+                case "View a Department":
+                    viewDepartment();
                     break;
-                case "Add an Employee":
-                    addEmployee();
+                case "View an Employee":
+                    viewEmployee();
                     break;
-                case "Add a Role":
-                    addRole();
+                case "View a Role":
+                    viewRole();
                     break;
+         
                 case "Nevermind, Exit Application!":
                     quit();
                 default:
@@ -65,40 +71,42 @@ const starterUp = () => {
         })
 };
 
-// add a department to the database
-function addDepartment() {
+// need to add 3 functions for adding Department, Employee, and a Role and placing them inside the switch cases above
+
+// view a department to the database
+function viewDepartment() {
     // question for office hours or tutoring: How do I query and display ALL departments in the console?
 
     const query = 'SELECT * FROM employee_trackerdb.department';
     connection.query(query, (err, res) => {
         if (err) throw err;
-        res.forEach;
+        // res.forEach;
         console.log("\n");
         console.table(res);
     })
     starterUp();
 }
 
-// add an employee to the database
-function addEmployee() {
+// view an employee to the database
+function viewEmployee() {
     // SELECT * FROM employee_trackerdb.employee;
     const query = 'SELECT * FROM employee_trackerdb.employee';
     connection.query(query, (err, res) => {
         if (err) throw err;
-        res.forEach;
+        // res.forEach;
         console.log("\n");
         console.table(res);
     })
     starterUp();
 }
 
-// add a role to the database
-function addRole() {
+// view a role to the database
+function viewRole() {
     // SELECT * FROM employee_trackerdb.role;
     const query = 'SELECT * FROM employee_trackerdb.role';
     connection.query(query, (err, res) => {
         if (err) throw err;
-        res.forEach;
+        // res.forEach;
         console.log("\n");
         console.table(res);
     })
