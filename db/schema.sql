@@ -8,13 +8,13 @@ CREATE TABLE department(
   PRIMARY KEY (id)
 );
 
-CREATE TABLE emprole(
+CREATE TABLE role(
   id INTEGER auto_increment NOT NULL,
-  first_name VARCHAR(30) NOT NULL,
-  last_name VARCHAR(30) NOT NULL,
-  emp_id INT,
+  title varchar(30),
+  salary DECIMAL,
+  department_id INT,
   PRIMARY KEY (id),
-  FOREIGN KEY (emp_id) REFERENCES department(id)
+  constraint fk_department FOREIGN KEY (department_id) REFERENCES department(id)
 );
 
 CREATE TABLE employee(
@@ -24,11 +24,6 @@ last_name VARCHAR(30) NOT NULL,
 role_id INT,
 manager_id INT,
 PRIMARY KEY (id),
-FOREIGN KEY (manager_id) REFERENCES employee(id)
+constraint fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id),
+constraint fk_role FOREIGN KEY (role_id) references role(id)
 );
-
-
--- TODO
--- Add in data to all 3 tables
--- 5 entries per table
--- 5 departments, employees, roles
