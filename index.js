@@ -52,7 +52,15 @@ const starterUp = () => {
                 case "View a Role":
                     viewRole();
                     break;
-         
+                case "Add a Department":
+                    addDepartment();
+                    break;
+                case "Add an Employee":
+                    addEmployee();
+                    break;
+                case "Add a Role":
+                    addRole();
+                    break;
                 case "Nevermind, Exit Application!":
                     quit();
                 default:
@@ -72,6 +80,21 @@ const starterUp = () => {
 };
 
 // need to add 3 functions for adding Department, Employee, and a Role and placing them inside the switch cases above
+
+// add a department
+function addDepartment() {
+    console.log("Department Added working!");
+}
+
+// add Employee
+function addEmployee() {
+    console.log("Employee Add working!");
+}
+
+// add Role
+function addRole() {
+    console.log("Role Add working!");
+}
 
 // view a department to the database
 function viewDepartment() {
