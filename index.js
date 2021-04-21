@@ -73,7 +73,8 @@ function addDepartment() {
     connection.query(query, (err, res) => {
         if (err) throw err;
         res.forEach;
-        console.log(res);
+        console.log("\n");
+        console.table(res);
     })
     starterUp();
 }
@@ -85,7 +86,8 @@ function addEmployee() {
     connection.query(query, (err, res) => {
         if (err) throw err;
         res.forEach;
-        console.log(res);
+        console.log("\n");
+        console.table(res);
     })
     starterUp();
 }
@@ -97,7 +99,8 @@ function addRole() {
     connection.query(query, (err, res) => {
         if (err) throw err;
         res.forEach;
-        console.log(res);
+        console.log("\n");
+        console.table(res);
     })
     starterUp();
 }
