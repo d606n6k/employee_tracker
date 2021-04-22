@@ -8,6 +8,7 @@ const connection = require('./db/connection.js');
 // inquirer package for prompting the user
 const inquirer = require('inquirer');
 
+
 // NICE TO HAVE WORKING AT END:
 // console title package options
 function figletStart() {
@@ -70,6 +71,7 @@ const starterUp = () => {
                     break;
                 case "Nevermind, Exit Application!":
                     quit();
+                    break;
                 default:
                     break;
             }
@@ -193,11 +195,13 @@ function viewDepartment() {
     const query = 'SELECT * FROM employee_trackerdb.department';
     connection.query(query, (err, res) => {
         if (err) throw err;
-        // res.forEach;
         console.log("\n");
         console.table(res);
+        starterUp();
+        return;
     })
-    starterUp();
+    // console.log();
+    // starterUp();
 }
 
 // view an employee to the database
@@ -208,8 +212,9 @@ function viewEmployee() {
         // res.forEach;
         console.log("\n");
         console.table(res);
+        starterUp();
+        return;
     })
-    starterUp();
 }
 
 // view a role to the database
@@ -220,8 +225,9 @@ function viewRole() {
         // res.forEach;
         console.log("\n");
         console.table(res);
+        starterUp();
+        return;
     })
-    starterUp();
 }
 
 
