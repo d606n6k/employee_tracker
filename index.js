@@ -119,8 +119,12 @@ async function addDepartment() {
 
 // add Role
 async function addRole() {
-    await inquirer
-        .prompt([
+
+
+
+
+    try {
+        const data = await inquirer.prompt([
             {
                 type: 'input',
                 message: 'What is the name of the new Role?',
@@ -136,17 +140,26 @@ async function addRole() {
                 message: 'Which department should this Role be added to? (Number Only)',
                 name: 'newDepartmentId',
             }
-        ]).then((data) => {
-            const query = `INSERT INTO role(title,salary,department_id) VALUES ("${data.newRole}","${data.newSalary}",${data.newDepartmentId})`;
-            connection.query(query, (err, res) => {
-                if (err) throw err;
-            })
-            // console.log(data);
-        })
-    console.log('\n');
-    console.log("New Role Added!");
-    console.log('\n');
-    starterUp();
+        ])
+        const addRoleQuery = `INSERT INTO role(title,salary,department_id) VALUES ("${data.newRole}","${data.newSalary}",${data.newDepartmentId})`;
+        connection.query(addRoleQuery);
+        console.log('\n');
+        console.log("New Role Added!");
+        console.log('\n');
+        starterUp();
+    } catch (err) {
+        if (err) throw err;
+    }
+
+    // const query = `INSERT INTO role(title,salary,department_id) VALUES ("${data.newRole}","${data.newSalary}",${data.newDepartmentId})`;
+    // connection.query(query, (err, res) => {
+    //     if (err) throw err;
+    // })
+    // console.log(data);
+    // console.log('\n');
+    // console.log("New Role Added!");
+    // console.log('\n');
+    // starterUp();
 }
 
 // add Employee
@@ -218,16 +231,25 @@ function viewEmployee() {
 }
 
 // view a role to the database
-function viewRole() {
+async function viewRole() {
     const query = 'SELECT * FROM employee_trackerdb.role';
-    connection.query(query, (err, res) => {
-        if (err) throw err;
-        // res.forEach;
+    try {
+        const queryAnswer = await connection.query(query);
         console.log("\n");
-        console.table(res);
+        console.table(queryAnswer);
         starterUp();
-        return
-    })
+    } catch (err) {
+        if (err) throw err;
+    }
+    // connection.query(query, async (err, res) => {
+    //     if (err) throw err;
+    //     // res.forEach;
+    //     console.log("\n");
+    //     console.table(res);
+    //     return;
+    // })
+    // starterUp();
+    // return
 }
 
 
@@ -241,5 +263,5 @@ const quit = () => {
 };
 
 // starter up!
-// figletStart();
+figletStart();
 starterUp();
