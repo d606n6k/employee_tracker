@@ -119,10 +119,6 @@ async function addDepartment() {
 
 // add Role
 async function addRole() {
-
-
-
-
     try {
         const data = await inquirer.prompt([
             {
@@ -150,16 +146,6 @@ async function addRole() {
     } catch (err) {
         if (err) throw err;
     }
-
-    // const query = `INSERT INTO role(title,salary,department_id) VALUES ("${data.newRole}","${data.newSalary}",${data.newDepartmentId})`;
-    // connection.query(query, (err, res) => {
-    //     if (err) throw err;
-    // })
-    // console.log(data);
-    // console.log('\n');
-    // console.log("New Role Added!");
-    // console.log('\n');
-    // starterUp();
 }
 
 // add Employee
