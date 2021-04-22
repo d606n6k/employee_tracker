@@ -10,14 +10,20 @@ const inquirer = require('inquirer');
 
 // NICE TO HAVE WORKING AT END:
 // console title package options
-// async function figletStart() {
-//     figlet('The Employee Tracker', function(err, data) {
+// function figletStart() {
+//     figlet.text('The Employee Tracker', {
+//         font: 'Standard',
+//         horizontalLayout: 'default',
+//         verticalLayout: 'default',
+//         width: 80,
+//         whitespaceBreak: true
+//     }, function (err, data) {
 //         if (err) {
 //             console.log('Something went wrong...');
 //             console.dir(err);
 //             return;
 //         }
-//         console.log(data)
+//         console.log(data);
 //     });
 // };
 
@@ -41,10 +47,9 @@ const starterUp = () => {
                     "Nevermind, Exit Application!"
                 ],
             }
-        ]).then((answers) => {
+        ])
+        .then((answers) => {
             switch (answers.addChoice) {
-                // need to add switch cases for Add Department, Employee, and a Role
-
                 case "View Departments":
                     viewDepartment();
                     break;
@@ -68,8 +73,24 @@ const starterUp = () => {
                 default:
                     break;
             }
-        })
+        }).catch((err) => {
+            console.log(err);
+            process.exit(1);
+        });
 };
+// ********************** ADDS *******************************
+
+// select a role when needed when adding employee
+let roleArr = [];
+function selectRole() {
+    connection.query("SELECT * FROM role", function (err, res) {
+        if (err) throw err
+        for (var i = 0; i < res.length; i++) {
+            roleArr.push(res[i].title);
+        }
+    })
+    return roleArr;
+}
 
 // add a department
 async function addDepartment() {
@@ -88,7 +109,9 @@ async function addDepartment() {
             })
             // console.log(data);
         })
+    console.log('\n');
     console.log("Department Added!");
+    console.log('\n');
     starterUp();
 }
 
@@ -109,7 +132,7 @@ async function addRole() {
             {
                 type: 'input',
                 message: 'Which department should this Role be added to? (Number Only)',
-                name: 'newDepartmentId', 
+                name: 'newDepartmentId',
             }
         ]).then((data) => {
             const query = `INSERT INTO role(title,salary,department_id) VALUES ("${data.newRole}","${data.newSalary}",${data.newDepartmentId})`;
@@ -125,25 +148,13 @@ async function addRole() {
 }
 
 // add Employee
-function addEmployee() {
-    // get all of the roles from the database so we can ask the user to choose from all in db
-    // todo:
-    // comment out all inquirer code
-    // THEN test the connection.query -> console.log(role)
-    // get it to work then try turning inquirer back on
+async function addEmployee() {
     const query = 'SELECT title,id FROM role';
     const role = connection.query(query, (err, res) => {
         if (err) throw err;
     });
-
-    // old role + map function
-    // const roleTitle = role.map(({title , id})=> ({
-    //     name: title,
-    //     value: id
-    // }));
-
     console.log(role);
-    inquirer
+    await inquirer
         .prompt([
             {
                 type: 'input',
@@ -161,22 +172,24 @@ function addEmployee() {
                 type: 'list',
                 message: 'Please select the Role for the new Employee',
                 name: 'newEmployee',
-                choices: function (){
-                    let choiceArr = results[0].map(choice => choice.title);
-                    return choiceArr;
-                },
+                choices: selectRole(),
             }
-            
-        ])
-    console.log("Employee Add working!");
+        ]).then((answers) => {
+            console.log("\n");
+            connection.query("INSERT INTO employee SET ?", answers, (err, res) => {
+                if (err) throw err;
+                console.log(`${res.affectedRows} Employee has been created!`);
+            });
+        })
+    console.log('\n');
+    console.log("Employee Added!");
+    console.log('\n');
     starterUp();
 }
 
-
+// ******************* VIEWS *********************************
 // view a department - query database
 function viewDepartment() {
-    // question for office hours or tutoring: How do I query and display ALL departments in the console?
-
     const query = 'SELECT * FROM employee_trackerdb.department';
     connection.query(query, (err, res) => {
         if (err) throw err;
@@ -189,7 +202,6 @@ function viewDepartment() {
 
 // view an employee to the database
 function viewEmployee() {
-    // SELECT * FROM employee_trackerdb.employee;
     const query = 'SELECT * FROM employee_trackerdb.employee';
     connection.query(query, (err, res) => {
         if (err) throw err;
@@ -202,7 +214,6 @@ function viewEmployee() {
 
 // view a role to the database
 function viewRole() {
-    // SELECT * FROM employee_trackerdb.role;
     const query = 'SELECT * FROM employee_trackerdb.role';
     connection.query(query, (err, res) => {
         if (err) throw err;
@@ -217,7 +228,9 @@ function viewRole() {
 // quit out of the application if needed
 const quit = () => {
     connection.end();
+    console.log('\n');
     console.log('Good bye!');
+    console.log('\n');
     process.exit();
 };
 
