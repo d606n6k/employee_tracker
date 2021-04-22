@@ -226,7 +226,7 @@ function viewRole() {
         console.log("\n");
         console.table(res);
         starterUp();
-        return;
+        return
     })
 }
 
