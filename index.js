@@ -1,6 +1,8 @@
 // dependencies
 // console app title package
 const figlet = require('figlet');
+// console.table package
+const cTable = require('console.table');
 // require the connection.js connection function
 const connection = require('./db/connection.js');
 // inquirer package for prompting the user
@@ -30,9 +32,9 @@ const starterUp = () => {
                 name: "addChoice",
                 message: "Please choose what you would like to do:",
                 choices: [
-                    "View a Department",
-                    "View an Employee",
-                    "View a Role",
+                    "View Departments",
+                    "View Employees",
+                    "View Roles",
                     "Add a Department",
                     "Add an Employee",
                     "Add a Role",
@@ -43,13 +45,13 @@ const starterUp = () => {
             switch (answers.addChoice) {
                 // need to add switch cases for Add Department, Employee, and a Role
 
-                case "View a Department":
+                case "View Departments":
                     viewDepartment();
                     break;
-                case "View an Employee":
+                case "View Employees":
                     viewEmployee();
                     break;
-                case "View a Role":
+                case "View Roles":
                     viewRole();
                     break;
                 case "Add a Department":
@@ -66,20 +68,8 @@ const starterUp = () => {
                 default:
                     break;
             }
-
-            // if (answers.addChoice === "Add a Department") {
-            //     addDepartment();
-            // } else if(answers.addChoice === "Add an Employee"){
-            //     addEmployee();
-            // }else if(answers.addChoice === "Add a Role"){
-            //     addRole()
-            // }else if(answers.addChoice === "Nevermind, Exit Application!"){
-            //     quit();
-            // }
         })
 };
-
-// need to add 3 functions for adding Department, Employee, and a Role and placing them inside the switch cases above
 
 // add a department
 async function addDepartment() {
@@ -92,8 +82,6 @@ async function addDepartment() {
                 name: 'newDepartment'
             }
         ]).then((data) => {
-            // something happens here 
-            // we want to push data.newDepartment 
             const query = `INSERT INTO department(name) VALUES ("${data.newDepartment}")`;
             connection.query(query, (err, res) => {
                 if (err) throw err;
@@ -118,8 +106,13 @@ async function addRole() {
                 message: 'What is the salary for the new Role?',
                 name: 'newSalary',
             },
+            {
+                type: 'input',
+                message: 'Which department should this Role be added to? (Number Only)',
+                name: 'newDepartmentId', 
+            }
         ]).then((data) => {
-            const query = `INSERT INTO role(title) VALUES ("${data.newRole}")`;
+            const query = `INSERT INTO role(title,salary,department_id) VALUES ("${data.newRole}","${data.newSalary}",${data.newDepartmentId})`;
             connection.query(query, (err, res) => {
                 if (err) throw err;
             })
