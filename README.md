@@ -5,7 +5,7 @@
 ![The Employee Tracker Screenshot Image 2](./assets/images/screenshot2.png)
 
 ## Description
-This is a simple command line application that allows a business to keep track of its orginizational structure! You can view company structure by Departments, Employees, and Roles. You can also add Departments, Employees, and Roles as well!
+This is a simple command line application that allows a business to keep track of its orginizational structure! You can view company structure by Departments, Employees, and Roles. You can also add Departments, Employees, and Roles as well! Future iterations will allows for deletion of Departments, Employees, and Roles along with validation.
 
 Please watch this instructional walkthrough video: https://youtu.be/s8dbDn2kYbo
 
