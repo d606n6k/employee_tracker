@@ -17,10 +17,10 @@ Please watch this instructional walkthrough video: https://youtu.be/s8dbDn2kYbo
 
     
 ## Usage
-Run `npm i` to install app dependencies 
-Configure your data base with the `schema.sql` file located in the `/db` folder
-Seed your database with the `seeds.sql` file located in the `/db` folder
-Run `node index.js` or `npm start` in the terminal to start the application!
+- Run `npm i` to install app dependencies
+- Configure your data base with the `schema.sql` file located in the `/db` folder
+- Seed your database with the `seeds.sql` file located in the `/db` folder
+- Run `node index.js` or `npm start` in the terminal to start the application!
     
 ## Credits
     
