@@ -10,22 +10,22 @@ const inquirer = require('inquirer');
 
 // NICE TO HAVE WORKING AT END:
 // console title package options
-// function figletStart() {
-//     figlet.text('The Employee Tracker', {
-//         font: 'Standard',
-//         horizontalLayout: 'default',
-//         verticalLayout: 'default',
-//         width: 80,
-//         whitespaceBreak: true
-//     }, function (err, data) {
-//         if (err) {
-//             console.log('Something went wrong...');
-//             console.dir(err);
-//             return;
-//         }
-//         console.log(data);
-//     });
-// };
+function figletStart() {
+    figlet.text('The Employee Tracker', {
+        font: 'Standard',
+        horizontalLayout: 'default',
+        verticalLayout: 'default',
+        width: 80,
+        whitespaceBreak: true
+    }, function (err, data) {
+        if (err) {
+            console.log('Something went wrong...');
+            console.dir(err);
+            return;
+        }
+        console.log(data);
+    });
+};
 
 // start the application
 // app loads then the user is prompted to select to addPerson(), viewOrg(), or to update an existing employee role using roleUpdater()
