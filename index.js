@@ -82,21 +82,105 @@ const starterUp = () => {
 // need to add 3 functions for adding Department, Employee, and a Role and placing them inside the switch cases above
 
 // add a department
-function addDepartment() {
-    console.log("Department Added working!");
+async function addDepartment() {
+    // ask the user what department they want to add (inquirer prompt here)
+    await inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'What is the name of the new Department?',
+                name: 'newDepartment'
+            }
+        ]).then((data) => {
+            // something happens here 
+            // we want to push data.newDepartment 
+            const query = `INSERT INTO department(name) VALUES ("${data.newDepartment}")`;
+            connection.query(query, (err, res) => {
+                if (err) throw err;
+            })
+            // console.log(data);
+        })
+    console.log("Department Added!");
+    starterUp();
+}
+
+// add Role
+async function addRole() {
+    await inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'What is the name of the new Role?',
+                name: 'newRole',
+            },
+            {
+                type: 'input',
+                message: 'What is the salary for the new Role?',
+                name: 'newSalary',
+            },
+        ]).then((data) => {
+            const query = `INSERT INTO role(title) VALUES ("${data.newRole}")`;
+            connection.query(query, (err, res) => {
+                if (err) throw err;
+            })
+            // console.log(data);
+        })
+    console.log('\n');
+    console.log("New Role Added!");
+    console.log('\n');
+    starterUp();
 }
 
 // add Employee
 function addEmployee() {
+    // get all of the roles from the database so we can ask the user to choose from all in db
+    // todo:
+    // comment out all inquirer code
+    // THEN test the connection.query -> console.log(role)
+    // get it to work then try turning inquirer back on
+    const query = 'SELECT title,id FROM role';
+    const role = connection.query(query, (err, res) => {
+        if (err) throw err;
+    });
+
+    // old role + map function
+    // const roleTitle = role.map(({title , id})=> ({
+    //     name: title,
+    //     value: id
+    // }));
+
+    console.log(role);
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: 'What is the first name of the new Employee?',
+                name: 'firstName',
+            },
+            {
+                type: 'input',
+                message: 'What is the last name of the new Employee?',
+                name: 'lastName',
+            },
+            {
+                // need to get the list of existing roles
+                // needs to display as a list
+                type: 'list',
+                message: 'Please select the Role for the new Employee',
+                name: 'newEmployee',
+                choices: function (){
+                    let choiceArr = results[0].map(choice => choice.title);
+                    return choiceArr;
+                },
+            }
+            
+        ])
     console.log("Employee Add working!");
+    starterUp();
 }
 
-// add Role
-function addRole() {
-    console.log("Role Add working!");
-}
 
-// view a department to the database
+// view a department - query database
 function viewDepartment() {
     // question for office hours or tutoring: How do I query and display ALL departments in the console?
 
