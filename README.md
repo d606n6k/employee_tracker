@@ -1,4 +1,6 @@
+![license](https://img.shields.io/badge/license-MIT-blue)
 # The Employee Tracker App!
+
 ![The Employee Tracker Screenshot Image 1](./assets/images/screenshot.png)
 ![The Employee Tracker Screenshot Image 2](./assets/images/screenshot2.png)
 
@@ -11,20 +13,13 @@ Please watch this instructional walkthrough video: https://youtu.be/s8dbDn2kYbo
 - [Usage](#usage)
 - [Credits](#credits)
 - [License](#license)
-
-## Badges
-![license](https://img.shields.io/badge/license-MIT-blue)
-
-    
+ 
 ## Usage
 - Run `npm i` to install app dependencies
 - Configure your data base with the `schema.sql` file located in the `/db` folder
 - Seed your database with the `seeds.sql` file located in the `/db` folder
 - Run `node index.js` or `npm start` in the terminal to start the application!
     
-## Credits
-    
-Created by [d606n6k](https://github.com/d606n6k)
     
 ## License
 License: MIT
@@ -45,3 +40,7 @@ If you would like to contribute to this project, please fork the project as need
 Have any questions for the author? Contact this author via [Email](mailto:aaronlucht@gmail.com)
 
 Check out the author's [Github](https://github.com/d606n6k)
+
+## Credits
+    
+Created by [d606n6k](https://github.com/d606n6k)
